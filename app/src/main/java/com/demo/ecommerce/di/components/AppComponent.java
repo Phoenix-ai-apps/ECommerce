@@ -4,7 +4,9 @@ import com.demo.ecommerce.AppContext;
 import com.demo.ecommerce.MainActivity;
 import com.demo.ecommerce.di.modules.AppModule;
 import com.demo.ecommerce.di.modules.DatabaseModules;
-import com.demo.ecommerce.presentation.MainActivityPresenter;
+import com.demo.ecommerce.presentation.gridView.GridViewFragmentPresenter;
+import com.demo.ecommerce.presentation.mainActivity.MainActivityPresenter;
+import com.demo.ecommerce.presentation.recyclerView.RecyclerViewFragmentPresenter;
 
 import javax.inject.Singleton;
 
@@ -26,5 +28,7 @@ public interface AppComponent {
     void inject(MainActivity mainActivity);
 
     void inject(MainActivityPresenter presenter);
+    void inject(GridViewFragmentPresenter presenter);
+    void inject(RecyclerViewFragmentPresenter presenter);
 
 }

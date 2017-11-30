@@ -1,29 +1,33 @@
 package com.demo.ecommerce;
 
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
-import com.demo.ecommerce.database.datasource.AppVersionDataSource;
 import com.demo.ecommerce.database.datasource.CategoryDataSource;
 import com.demo.ecommerce.database.datasource.ProductsDataSource;
 import com.demo.ecommerce.di.DependencyInjector;
-import com.demo.ecommerce.models.AppVersion;
 import com.demo.ecommerce.models.Categories;
 import com.demo.ecommerce.models.EcommerceModel;
 import com.demo.ecommerce.models.ProductRanking;
 import com.demo.ecommerce.models.Products;
 import com.demo.ecommerce.models.Rankings;
-import com.demo.ecommerce.presentation.MainActivityContractor;
-import com.demo.ecommerce.presentation.MainActivityPresenter;
+import com.demo.ecommerce.presentation.mainActivity.MainActivityContractor;
+import com.demo.ecommerce.presentation.mainActivity.MainActivityPresenter;
 import com.demo.ecommerce.utils.ApplicationUtils;
 import com.demo.ecommerce.utils.NetworkUtils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import butterknife.BindView;
 
 public class MainActivity extends BaseActivity<MainActivityPresenter> implements MainActivityContractor.View {
 
@@ -35,12 +39,79 @@ public class MainActivity extends BaseActivity<MainActivityPresenter> implements
     @Inject
     ProductsDataSource productsDataSource;
 
+    @BindView(R.id.sliding_tabs)           TabLayout tabLayout;
+
+    private GridFragment                   GridFragment;
+    private RecyclerFragment               recyclerFragment;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initResources();
+
+        setupTabLayout();
+
+        bindWidgetsWithAnEvent();
+
+    }
+
+    private void bindWidgetsWithAnEvent() {
+
+        replaceFragment(GridFragment);
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                setCurrentTabFragment(tab.getPosition());
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+    }
+
+    private void setCurrentTabFragment(int position) {
+
+        switch (position)
+        {
+            case 0 :
+                replaceFragment(GridFragment);
+                break;
+
+            case 1 :
+                replaceFragment(recyclerFragment);
+                break;
+
+            default:
+
+        }
+    }
+
+
+    private void replaceFragment(Fragment  fragment) {
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.frame_container, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.commit();
+    }
+
+    private void setupTabLayout() {
+
+        GridFragment     = new GridFragment();
+        recyclerFragment = new RecyclerFragment();
+        tabLayout.addTab(tabLayout.newTab().setText("GRID"),true);
+        tabLayout.addTab(tabLayout.newTab().setText("RECYCLER"));
+
+        tabLayout.setTabTextColors(R.color.black,R.color.white);
+
+        tabLayout.setTabTextColors(Color.parseColor("#000000"),Color.parseColor("#ffffff"));
 
     }
 

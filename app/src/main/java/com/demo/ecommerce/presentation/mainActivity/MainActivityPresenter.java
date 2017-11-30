@@ -1,4 +1,4 @@
-package com.demo.ecommerce.presentation;
+package com.demo.ecommerce.presentation.mainActivity;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -11,7 +11,6 @@ import com.demo.ecommerce.MainActivity;
 import com.demo.ecommerce.database.datasource.AppVersionDataSource;
 import com.demo.ecommerce.di.DependencyInjector;
 import com.demo.ecommerce.managers.CustomVolleyPostRequestWithTextPlain;
-import com.demo.ecommerce.models.AppVersion;
 import com.demo.ecommerce.models.EcommerceModel;
 import com.demo.ecommerce.utils.ApplicationUtils;
 import com.demo.ecommerce.utils.DeserializeUtils;
@@ -29,7 +28,6 @@ import static com.demo.ecommerce.constants.UrlConstants.SERVICE_JSON;
 public class MainActivityPresenter implements MainActivityContractor.Presenter {
 
     private MainActivityContractor.View mView;
-    private MainActivityPresenter presenter;
 
 
     @Inject
@@ -41,6 +39,7 @@ public class MainActivityPresenter implements MainActivityContractor.Presenter {
         DependencyInjector.appComponent().inject(this);
 
     }
+
 
     @Override
     public void start() {

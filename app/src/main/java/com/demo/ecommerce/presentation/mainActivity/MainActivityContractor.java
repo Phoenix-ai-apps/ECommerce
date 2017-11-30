@@ -1,4 +1,4 @@
-package com.demo.ecommerce.presentation;
+package com.demo.ecommerce.presentation.mainActivity;
 
 import com.demo.ecommerce.BasePresenter;
 import com.demo.ecommerce.BaseView;
@@ -23,6 +23,7 @@ public interface MainActivityContractor {
         void doServerCall();
 
     }
+
 
 
 }
