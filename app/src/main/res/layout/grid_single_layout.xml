@@ -2,13 +2,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:background="@drawable/custom_border">
 
-    <ImageView
-        android:id="@+id/grid_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center">
-    </ImageView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/grid_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_gravity="center">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/txt_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:padding="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:text="lsbckkckcknscknc"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

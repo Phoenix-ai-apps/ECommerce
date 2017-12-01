@@ -1,4 +1,4 @@
-package com.demo.ecommerce;
+package com.demo.ecommerce.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,11 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.demo.ecommerce.BaseActivity;
+import com.demo.ecommerce.BasePresenter;
+import com.demo.ecommerce.BaseView;
+import com.demo.ecommerce.helper.HelperInterface;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public abstract class BaseFragment <T extends BasePresenter> extends Fragment implements BaseView {
+public abstract class BaseFragment <T extends BasePresenter> extends Fragment implements BaseView,HelperInterface {
 
     protected T mPresenter;
     private Unbinder unbinder;

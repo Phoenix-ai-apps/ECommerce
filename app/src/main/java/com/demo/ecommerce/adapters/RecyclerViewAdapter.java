@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.demo.ecommerce.R;
+import com.demo.ecommerce.models.Products;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,19 +23,19 @@ import butterknife.ButterKnife;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
-    private final int[] imageId;
-    private final String[] name;
+    List<Products> productsList;
 
-    public RecyclerViewAdapter(Context mContext, int[] imageId, String[] name) {
+    public RecyclerViewAdapter(Context mContext,  List<Products> productsList) {
         this.mContext = mContext;
-        this.imageId = imageId;
-        this.name = name;
+        this.productsList = productsList;
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.card_image_view)             ImageView cardImage;
-        @BindView(R.id.tvShortDesc)                 TextView tvDesc;
+        @BindView(R.id.txt_product_name)            TextView txtProductName;
+        @BindView(R.id.txt_order)                   TextView txtOrder;
+        @BindView(R.id.txt_share)                   TextView txtShare;
+        @BindView(R.id.txt_viewed)                  TextView txtViewed;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
@@ -54,9 +57,35 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
 
-            itemViewHolder.cardImage.setImageResource(imageId[position]);
+            if(productsList != null && productsList.size() > 0){
+                Products products = productsList.get(position);
 
-            itemViewHolder.tvDesc.setText(name[position]);
+                if(products != null && products.getName() != null && products.getName().trim().length() > 0){
+                    itemViewHolder.txtProductName.setText(products.getName().trim());
+                }
+
+                if(products != null && products.getOrderId() != 0){
+                    itemViewHolder.txtOrder.setText("Ordered: "+products.getOrderId());
+                    itemViewHolder.txtOrder.setVisibility(View.VISIBLE);
+                }else {
+                    itemViewHolder.txtOrder.setVisibility(View.INVISIBLE);
+                }
+
+                if(products != null && products.getShareId() != 0){
+                    itemViewHolder.txtShare.setText("Shared: "+products.getShareId());
+                    itemViewHolder.txtShare.setVisibility(View.VISIBLE);
+                }else{
+                    itemViewHolder.txtShare.setVisibility(View.INVISIBLE);
+                }
+
+                if(products != null && products.getViewId() != 0){
+                    itemViewHolder.txtViewed.setText("Viewed: "+products.getViewId());
+                    itemViewHolder.txtViewed.setVisibility(View.VISIBLE);
+                }else {
+                    itemViewHolder.txtViewed.setVisibility(View.INVISIBLE);
+                }
+
+            }
 
         }
 
@@ -64,6 +93,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return imageId.length;
+        return productsList.size();
     }
 }

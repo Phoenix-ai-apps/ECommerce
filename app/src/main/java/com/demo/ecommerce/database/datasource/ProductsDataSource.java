@@ -126,6 +126,33 @@ public class ProductsDataSource implements HelperInterface {
         }
     }
 
+    public List<Products> getAllProducstsByName(String name) {
+        List<Products> productses = new ArrayList<Products>();
+
+        Cursor cursor = null;
+
+        if(name != null && name.trim().length() > 0){
+            cursor = database.query(TABLE_PRODUCTS, allColumns, PRODUCT_NAME + " LIKE ?",
+                    new String[]{name+"%"}, null, null, PRODUCT_NAME + " ASC");
+
+        }else {
+            cursor = database.query(TABLE_PRODUCTS, allColumns,
+                    null, null, null, null, null);
+        }
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Products city = cursorToProducts(cursor);
+            productses.add(city);
+            cursor.moveToNext();
+        }
+        Log.i(TAG, "total products found : " + cursor.getCount() + " products list size : " + productses.size());
+        cursor.close();
+
+        return productses;
+    }
+
+
 
     public List<Products> getAllProducts() {
         List<Products> productsList = new ArrayList<Products>();

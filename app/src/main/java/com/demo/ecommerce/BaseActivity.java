@@ -16,14 +16,13 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         super.setContentView(layoutResID);
         ButterKnife.bind(this);
         mPresenter = getPresenter();
+
         if(mPresenter!=null) {
             mPresenter.start();
         }
     }
 
-	protected T getPresenter(){
-		return null;
-	}
+    protected abstract T getPresenter();
 
     @Override
     public void showError(String message) {

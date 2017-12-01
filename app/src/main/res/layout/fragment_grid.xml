@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GridFragment">
+    tools:context=".fragments.GridFragment">
 
     <GridView
         android:id="@+id/gridView"
-        android:numColumns="auto_fit"
+        android:numColumns="2"
         android:gravity="center"
-        android:columnWidth="120dp"
+        android:columnWidth="150dp"
         android:stretchMode="columnWidth"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/_10sdp"
         />
 
 </LinearLayout>

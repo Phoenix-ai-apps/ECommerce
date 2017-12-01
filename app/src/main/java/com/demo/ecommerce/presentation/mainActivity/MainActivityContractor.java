@@ -14,8 +14,7 @@ public interface MainActivityContractor {
 
         void showErrorInView(String error);
         void showVolleyException(String e);
-        void storeDataToDB(EcommerceModel ecommerceModel);
-
+        void addHomeActivity();
     }
 
     interface Presenter extends BasePresenter {

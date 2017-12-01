@@ -6,21 +6,21 @@ apply plugin: 'me.tatarka.retrolambda'
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
-    def STRING                           = "String"
-    def INT                              = "int"
+    def STRING                        = "String"
+    def INT                           = "int"
 
-    def VARIABLE_VERSION                 = "APP_VERSION"
-    def VARIABLE_APP_ENVIRONMENT         = "APP_ENVIRONMENT"
-    def VARIABLE_BASE_URL                = "BASE_URL"
+    def VARIABLE_VERSION              = "APP_VERSION"
+    def VARIABLE_APP_ENVIRONMENT      = "APP_ENVIRONMENT"
+    def VARIABLE_BASE_URL             = "BASE_URL"
 
-    def VALUE_VERSION_UAT                = '"1.0"'
-    def VALUE_VERSION_STAGING            = '"1.0"'
-    def VALUE_VERSION_LIVE               = '"1.0"'
-    def VALUE_BASE_URL                   = '"https://stark-spire-93433.herokuapp.com/"'
+    def VALUE_VERSION_UAT             = '"1.0"'
+    def VALUE_VERSION_STAGING         = '"1.0"'
+    def VALUE_VERSION_LIVE            = '"1.0"'
+    def VALUE_BASE_URL                = '"https://stark-spire-93433.herokuapp.com/"'
 
-    def VALUE_APP_ENVIRONMENT_UAT        = '"UAT"'
-    def VALUE_APP_ENVIRONMENT_LIVE       = '"LIVE"'
-    def VALUE_APP_ENVIRONMENT_STAGING    = '"STAGING"'
+    def VALUE_APP_ENVIRONMENT_UAT     = '"UAT"'
+    def VALUE_APP_ENVIRONMENT_LIVE    = '"LIVE"'
+    def VALUE_APP_ENVIRONMENT_STAGING = '"STAGING"'
 
     compileSdkVersion globalConfiguration.getAt("compileSdk")
     buildToolsVersion globalConfiguration.getAt("buildTools")
@@ -43,13 +43,6 @@ android {
     }
 
 
-    compileOptions {
-        targetCompatibility = '1.8'
-        sourceCompatibility = '1.8'
-    }
-
-
-
     signingConfigs {
         debug {
             keyAlias 'androiddebugkey'
@@ -69,34 +62,34 @@ android {
     buildTypes {
         debug {
             versionNameSuffix "1.0"
-            debuggable      true
-            minifyEnabled   false
+            debuggable true
+            minifyEnabled false
             shrinkResources false
             zipAlignEnabled true
-            buildConfigField STRING, VARIABLE_VERSION , VALUE_VERSION_UAT
-            buildConfigField STRING, VARIABLE_BASE_URL , VALUE_BASE_URL
+            buildConfigField STRING, VARIABLE_VERSION, VALUE_VERSION_UAT
+            buildConfigField STRING, VARIABLE_BASE_URL, VALUE_BASE_URL
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
         staging {
             versionNameSuffix "1.0"
-            debuggable      true
-            minifyEnabled   false
+            debuggable true
+            minifyEnabled false
             shrinkResources false
             zipAlignEnabled true
             buildConfigField STRING, VARIABLE_VERSION, VALUE_VERSION_STAGING
-            buildConfigField STRING, VARIABLE_BASE_URL , VALUE_BASE_URL
+            buildConfigField STRING, VARIABLE_BASE_URL, VALUE_BASE_URL
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
         release {
             versionNameSuffix "1.0"
-            debuggable      false
-            minifyEnabled   true
+            debuggable false
+            minifyEnabled true
             shrinkResources true
             zipAlignEnabled true
             buildConfigField STRING, VARIABLE_VERSION, VALUE_VERSION_LIVE
-            buildConfigField STRING, VARIABLE_BASE_URL , VALUE_BASE_URL
+            buildConfigField STRING, VARIABLE_BASE_URL, VALUE_BASE_URL
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -121,7 +114,7 @@ android {
 def renameAPK(variant, globalConfiguration) {
     variant.outputs.each { output ->
         // def applicationName = globalConfiguration.getAt("projectName");
-        def applicationName = "E-Commerce";
+        def applicationName = "My E-Commerce";
         def file = output.packageApplication.outputFile
         def buildType = variant.variantData.variantConfiguration.buildType.name
         def fileName = applicationName + " APK " + assignNewBuildTypeName(buildType) + " v" + variant.versionName + ".apk"
@@ -149,11 +142,9 @@ dependencies {
     androidTestCompile(globalTestDependencies.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestCompile globalTestDependencies.supportAnnotations
-    androidTestCompile globalTestDependencies.testRunner
+   // androidTestCompile globalTestDependencies.supportAnnotations
+   // androidTestCompile globalTestDependencies.testRunner
 
-    compile globalDependencies.permissionDispacher
-    annotationProcessor globalDependencies.permissionDispacherCompiler
 
     compile globalDependencies.butterknife
     annotationProcessor globalDependencies.butterknifeCompiler
@@ -163,16 +154,17 @@ dependencies {
     compile globalDependencies.design
     compile globalDependencies.recyclerView
     compile globalDependencies.cardView
-    annotationProcessor globalDependencies.daggerCompiler
     compile globalDependencies.dagger
-    annotationProcessor globalDependencies.daggerActivityCompiler
-    compile globalDependencies.daggerActivity
-    compile globalDependencies.daggerSupport
+    annotationProcessor globalDependencies.daggerCompiler
+   // compile globalDependencies.daggerActivity
+   // annotationProcessor globalDependencies.daggerActivityCompiler
+   // compile globalDependencies.daggerSupport
     compile globalDependencies.butterknifeCompiler
     compile globalDependencies.butterknife
     compile globalDependencies.gson
     compile globalDependencies.sdp
     compile globalDependencies.volley
 
-       /*compile globalDependencies.multiDex*/
+    /*compile globalDependencies.multiDex*/
+
 }

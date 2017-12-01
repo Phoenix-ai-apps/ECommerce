@@ -1,6 +1,6 @@
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
-# in /home/administrator/Documents/SDK_Updated/tools/proguard/proguard-android.txt
+# in /home/angel/Documents/AJAY/SDK_Updated/tools/proguard/proguard-android.txt
 # You can edit the include path and order by changing the proguardFiles
 # directive in build.gradle.
 #
@@ -23,3 +23,46 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-ignorewarnings
+
+-keep class * {
+    public private *;
+}
+
+-keepclassmembers class * {
+        private *;
+}
+
+
+#Gson
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class sun.misc.Unsafe { *; }
+
+# Models
+-keep class com.demo.ecommerce.models.** { *; }
+
+
+#butterknife
+-dontwarn butterknife.internal.**
+-keep class **$$ViewInjector { *; }
+-keepnames class * { @butterknife.InjectView *;}
+
+#All Activity
+-keep public class * extends android.app.Activity
+-keep public class * extends android.support.v7.app.AppCompatActivity
+
+
+# For All extenal Libraries
+-keep class org.** { *; }
+-keep class android.** { *; }
+-keep class java.** { *; }
+-keep class butterknief.** { *; }
+-keep class javax.** { *; }
+-keep class io.** { *; }
+-keep class io.protostuff.** { *; }
+-keep class net.** { *; }
+-keep class com.google.** { *; }
+-keep class com.github.** { *; }
+-keep class com.android.** { *; }

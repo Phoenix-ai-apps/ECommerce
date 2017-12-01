@@ -59,7 +59,7 @@ public interface DatabaseConstants {
             PRODUCT_TAX        +" TEXT, " +
             PRODUCT_VIEWID     +" INTEGER, " +
             PRODUCT_ORDERID    +" INTEGER, " +
-            PRODUCT_SHAREID    +" INTEGER " +" ) ;";
+            PRODUCT_SHAREID    +" INTEGER " + ");";
 
 
 
