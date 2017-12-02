@@ -8,7 +8,9 @@ public interface AppConstants {
 
 
     int CONNECTION_TIMEOUT_20_SEC          = 20000;
-
-    int TYPE_NOT_CONNECTED                  = -1;
+    int TYPE_NOT_CONNECTED                 = -1;
+    String SORT_ORDER                      = "ORDERED";
+    String SORT_VIEWED                     = "VIEWED";
+    String SORT_SHARED                     = "SHARED";
 
 }

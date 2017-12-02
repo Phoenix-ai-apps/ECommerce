@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_70sdp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/custom_border">
 
@@ -34,18 +34,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:text="hfhjhfjkhjkhf mhjahffh mhfjhfj klhdhfkkj"
+                    android:text="Name of Product"
                     android:textColor="@color/grey_900"
                     android:layout_gravity="center"
                     android:textStyle="bold"/>
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey_400"
+                android:layout_marginTop="@dimen/_3sdp"/>
+
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="match_parent"
                android:orientation="horizontal"
-               android:padding="@dimen/_3sdp">
+               android:padding="@dimen/_5sdp">
 
 
                <TextView
@@ -58,20 +64,20 @@
                    android:layout_gravity="center"/>
 
                <TextView
-                   android:id="@+id/txt_share"
-                   android:layout_width="0dp"
-                   android:layout_weight="1"
-                   android:layout_height="match_parent"
-                   android:text="Share : 123456"
-                   android:textColor="@color/colorPrimary"
-                   android:layout_gravity="center"/>
-
-               <TextView
                    android:id="@+id/txt_viewed"
                    android:layout_width="0dp"
                    android:layout_weight="1"
                    android:layout_height="match_parent"
                    android:text="Viewed : 123456"
+                   android:textColor="@color/colorPrimary"
+                   android:layout_gravity="center"/>
+
+               <TextView
+                   android:id="@+id/txt_share"
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="match_parent"
+                   android:text="Share : 123456"
                    android:textColor="@color/colorPrimary"
                    android:layout_gravity="center"/>
 

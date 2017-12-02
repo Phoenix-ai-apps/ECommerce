@@ -6,9 +6,11 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.demo.ecommerce.helper.HelperInterface;
+
 import butterknife.ButterKnife;
 
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView{
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView, HelperInterface{
     public T mPresenter;
 
 	@Override

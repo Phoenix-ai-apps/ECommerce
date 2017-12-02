@@ -75,6 +75,8 @@ public class HomeActivityPresenter implements HomeActivityContractor.Presenter{
 
             }
 
+            mView.populateMenuAndSubMenu();
+
         }
 
 

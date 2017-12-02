@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.demo.ecommerce.di.DependencyInjector;
+import com.demo.ecommerce.helper.ApplicationHelper;
 import com.demo.ecommerce.presentation.mainActivity.MainActivityContractor;
 import com.demo.ecommerce.presentation.mainActivity.MainActivityPresenter;
 import com.demo.ecommerce.utils.ApplicationUtils;
@@ -140,5 +141,10 @@ public class MainActivity extends BaseActivity<MainActivityPresenter> implements
         finish();
         startActivity(intent);
 
+    }
+
+    @Override
+    public ApplicationHelper getHelper() {
+        return ApplicationHelper.getInstance();
     }
 }

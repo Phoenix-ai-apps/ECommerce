@@ -66,23 +66,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 if(products != null && products.getOrderId() != 0){
                     itemViewHolder.txtOrder.setText("Ordered: "+products.getOrderId());
-                    itemViewHolder.txtOrder.setVisibility(View.VISIBLE);
                 }else {
-                    itemViewHolder.txtOrder.setVisibility(View.INVISIBLE);
+                    itemViewHolder.txtOrder.setText("Ordered: 0");
                 }
 
                 if(products != null && products.getShareId() != 0){
                     itemViewHolder.txtShare.setText("Shared: "+products.getShareId());
-                    itemViewHolder.txtShare.setVisibility(View.VISIBLE);
                 }else{
-                    itemViewHolder.txtShare.setVisibility(View.INVISIBLE);
+                    itemViewHolder.txtShare.setText("Shared: 0");
                 }
 
                 if(products != null && products.getViewId() != 0){
                     itemViewHolder.txtViewed.setText("Viewed: "+products.getViewId());
-                    itemViewHolder.txtViewed.setVisibility(View.VISIBLE);
                 }else {
-                    itemViewHolder.txtViewed.setVisibility(View.INVISIBLE);
+                    itemViewHolder.txtViewed.setText("Viewed: 0");
                 }
 
             }
