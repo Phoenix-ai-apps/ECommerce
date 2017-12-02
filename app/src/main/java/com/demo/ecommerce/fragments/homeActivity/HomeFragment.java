@@ -1,5 +1,6 @@
 package com.demo.ecommerce.fragments.homeActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -44,9 +45,6 @@ public class HomeFragment extends BaseFragment<HomeActivityPresenter> implements
 
     private Activity mActivity;
 
-    public HomeFragment() {
-
-    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -55,7 +53,7 @@ public class HomeFragment extends BaseFragment<HomeActivityPresenter> implements
 
     }
 
-
+    @SuppressLint("ValidFragment")
     public HomeFragment(List<Products> productsList){
         this.productsList = productsList;
     }
