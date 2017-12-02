@@ -59,11 +59,11 @@ public class RunTimeSqLiteHelper extends SQLiteOpenHelper implements HelperInter
             try {
 
                 cursor = sqLiteDatabase.rawQuery("select * from " + TABLE_CATEGORY + " limit 1", null);
-                int index = cursor.getColumnIndex(CATEGORY_CHILD_CATEGORY);
+                int index = cursor.getColumnIndex(CATEGORY_PRODUCTS);
 
                 if (index == -1) {
                     sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_CATEGORY + " ADD COLUMN " +
-                            CATEGORY_CHILD_CATEGORY + " TEXT");
+                            CATEGORY_PRODUCTS + " TEXT");
                 }
             } catch (Exception e) {
                 e.printStackTrace();

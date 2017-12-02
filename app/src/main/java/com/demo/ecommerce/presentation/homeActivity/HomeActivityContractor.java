@@ -2,7 +2,8 @@ package com.demo.ecommerce.presentation.homeActivity;
 
 import com.demo.ecommerce.BasePresenter;
 import com.demo.ecommerce.BaseView;
-import com.demo.ecommerce.models.Products;
+import com.demo.ecommerce.models.MenuCategoryNSubCategory;
+import com.demo.ecommerce.models.product.Products;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface HomeActivityContractor {
 
     interface View extends BaseView{
 
-        void populateMenuAndSubMenu();
+        void populateMenuAndSubMenu(List<MenuCategoryNSubCategory> subCategoryList);
 
         void refreshHomeProducts(List<Products> productsList);
 

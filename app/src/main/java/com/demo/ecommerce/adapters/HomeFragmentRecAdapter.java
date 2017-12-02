@@ -5,11 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.demo.ecommerce.R;
-import com.demo.ecommerce.models.Products;
+import com.demo.ecommerce.models.product.Products;
 
 import java.util.List;
 
@@ -20,12 +19,12 @@ import butterknife.ButterKnife;
  * Created by root on 30/11/17.
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HomeFragmentRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     List<Products> productsList;
 
-    public RecyclerViewAdapter(Context mContext,  List<Products> productsList) {
+    public HomeFragmentRecAdapter(Context mContext, List<Products> productsList) {
         this.mContext = mContext;
         this.productsList = productsList;
     }
@@ -47,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ItemViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.cardview_single_layout, parent, false));
+                .inflate(R.layout.adapter_home_fragment, parent, false));
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.demo.ecommerce.utils;
 
-import com.demo.ecommerce.models.Products;
+import com.demo.ecommerce.models.product.Products;
 
 import java.util.Comparator;
 

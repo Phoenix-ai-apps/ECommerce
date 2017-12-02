@@ -10,7 +10,8 @@ import android.util.Log;
 import com.demo.ecommerce.database.RunTimeSqLiteHelper;
 import com.demo.ecommerce.helper.ApplicationHelper;
 import com.demo.ecommerce.helper.HelperInterface;
-import com.demo.ecommerce.models.Categories;
+import com.demo.ecommerce.models.category.Categories;
+import com.demo.ecommerce.models.product.Products;
 import com.demo.ecommerce.utils.ApplicationUtils;
 import com.demo.ecommerce.utils.DeserializeUtils;
 
@@ -32,7 +33,8 @@ public class CategoryDataSource implements HelperInterface {
     private String[] allColumns = {
                                    CATEGORY_ID    ,
                                    CATEGORY_NAME  ,
-                                   CATEGORY_CHILD_CATEGORY
+                                   CATEGORY_CHILD_CATEGORY,
+                                   CATEGORY_PRODUCTS
                                   };
 
 
@@ -56,6 +58,7 @@ public class CategoryDataSource implements HelperInterface {
         values.put(CATEGORY_ID             , categories.getId());
         values.put(CATEGORY_NAME           , categories.getName());
         values.put(CATEGORY_CHILD_CATEGORY , ApplicationUtils.toJson(categories.getChild_categories()));
+        values.put(CATEGORY_PRODUCTS       , ApplicationUtils.toJson(categories.getProducts()));
 
 
         long insertId = database.insert(TABLE_CATEGORY, null, values);
@@ -69,6 +72,7 @@ public class CategoryDataSource implements HelperInterface {
         values.put(CATEGORY_ID             , categories.getId());
         values.put(CATEGORY_NAME           , categories.getName());
         values.put(CATEGORY_CHILD_CATEGORY , ApplicationUtils.toJson(categories.getChild_categories()));
+        values.put(CATEGORY_PRODUCTS       , ApplicationUtils.toJson(categories.getProducts()));
 
         int id = database.update(TABLE_CATEGORY, values, null , null);
         Log.i(TAG, "updated category");
@@ -85,8 +89,10 @@ public class CategoryDataSource implements HelperInterface {
     }
 
 
-    public Categories getCategory() {
-        Cursor cursor = database.query(TABLE_CATEGORY, allColumns, null,null, null, null, null);
+    public Categories getCategoryById(String id) {
+        Cursor cursor = database.query(TABLE_CATEGORY, allColumns, CATEGORY_ID + "=?",
+                new String[]{id}, null, null, null);
+
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             Categories categories = cursorToCategories(cursor);
@@ -94,6 +100,23 @@ public class CategoryDataSource implements HelperInterface {
         } else {
             return null;
         }
+    }
+
+    public List<Products> getAllProductsByCatergoryId(String id) {
+        List<Products> productsList = new ArrayList<Products>();
+
+        Cursor cursor = database.query(TABLE_CATEGORY, allColumns, CATEGORY_ID + "=?",
+                new String[]{id}, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Categories products = cursorToCategories(cursor);
+            productsList.addAll(products.getProducts());
+            cursor.moveToNext();
+        }
+        Log.i(TAG, "total Products found : " + cursor.getCount() + " Products list size : " + productsList.size());
+        cursor.close();
+        return productsList;
     }
 
 
@@ -122,6 +145,7 @@ public class CategoryDataSource implements HelperInterface {
         categories.setId(cursor.getInt(0));
         categories.setName(cursor.getString(1));
         categories.setChild_categories(DeserializeUtils.deserializeStringJsonArray(cursor.getString(2)));
+        categories.setProducts(DeserializeUtils.deserializeProductsList(cursor.getString(3)));
 
         return categories;
     }

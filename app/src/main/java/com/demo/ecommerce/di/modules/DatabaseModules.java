@@ -2,7 +2,6 @@ package com.demo.ecommerce.di.modules;
 
 import android.content.Context;
 
-import com.demo.ecommerce.database.datasource.AppVersionDataSource;
 import com.demo.ecommerce.database.datasource.CategoryDataSource;
 import com.demo.ecommerce.database.datasource.ProductsDataSource;
 
@@ -15,11 +14,6 @@ import dagger.Provides;
 
 @Module
 public class DatabaseModules {
-
-@Provides
-AppVersionDataSource provideAppVersionDataSource(Context context){
-    return new AppVersionDataSource(context);
-}
 
 @Provides
 CategoryDataSource provideCategoryDataSource(Context context){

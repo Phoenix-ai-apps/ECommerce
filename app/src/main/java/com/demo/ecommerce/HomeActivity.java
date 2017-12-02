@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,11 +24,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.demo.ecommerce.adapters.HomeFragmentRecAdapter;
+import com.demo.ecommerce.adapters.MenuRecAdapter;
 import com.demo.ecommerce.database.datasource.ProductsDataSource;
 import com.demo.ecommerce.di.DependencyInjector;
 import com.demo.ecommerce.fragments.homeActivity.HomeFragment;
 import com.demo.ecommerce.helper.ApplicationHelper;
-import com.demo.ecommerce.models.Products;
+import com.demo.ecommerce.models.MenuCategoryNSubCategory;
+import com.demo.ecommerce.models.homeActivity.HomeView;
+import com.demo.ecommerce.models.product.Products;
 import com.demo.ecommerce.presentation.homeActivity.HomeActivityContractor;
 import com.demo.ecommerce.presentation.homeActivity.HomeActivityPresenter;
 import com.demo.ecommerce.utils.ProductSorter;
@@ -38,7 +45,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements HomeActivityContractor .View, View.OnClickListener {
+public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements HomeActivityContractor.View, View.OnClickListener,HomeView {
 
     public static final String TAG = HomeActivity   .class.getSimpleName();
 
@@ -47,10 +54,12 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
     @BindView(R.id.nav_view)        NavigationView navigationView;
 
     @BindView(R.id.layout_main)     LinearLayout   layoutMain;
+    @BindView(R.id.layout_menu)     LinearLayout   layoutMenu;
 
     @BindView(R.id.txt_verion)      TextView       txtVerion;
     @BindView(R.id.txt_sort)        TextView       txtSort;
     @BindView(R.id.edt_search)      EditText       edtSearch;
+    @BindView(R.id.rec_view_menu)   RecyclerView   recViewMenu;
 
     @Inject
     ProductsDataSource productsDataSource;
@@ -75,6 +84,7 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
     private void initResources(){
 
         txtSort.setOnClickListener(this);
+        layoutMenu.setOnClickListener(this);
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -105,7 +115,11 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                mPresenter.refreshHomeProducts(s.toString().trim());
+                if(s.toString().trim().length() > 0){
+                    mPresenter.refreshHomeProducts(s.toString().trim());
+                }else {
+                    addHomeFragment(productsList);
+                }
 
 
             }
@@ -149,7 +163,18 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
     }
 
     @Override
-    public void populateMenuAndSubMenu() {
+    public void populateMenuAndSubMenu(List<MenuCategoryNSubCategory> subCategoryList) {
+
+        if(subCategoryList != null && subCategoryList.size() > 0){
+            recViewMenu.setHasFixedSize(true);
+            recViewMenu.setNestedScrollingEnabled(false);
+            recViewMenu.setLayoutManager(new LinearLayoutManager(this));
+
+            MenuRecAdapter recyclerViewAdapter = new MenuRecAdapter(this,subCategoryList);
+            recViewMenu.setAdapter(recyclerViewAdapter);
+            recyclerViewAdapter.notifyDataSetChanged();
+
+        }
 
     }
 
@@ -163,21 +188,6 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
     }
 
 
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void hideProgress() {
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        showExitDialog();
-
-    }
 
     private void showExitDialog() {
 
@@ -207,11 +217,14 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
     public void onClick(View view) {
 
         if(view == txtSort){
-
            showProductSortDialog(this);
 
         }
 
+    }
+
+    public void hideMenu(){
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     private Dialog showProductSortDialog(Context context) {
@@ -300,7 +313,37 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
     }
 
     @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        showExitDialog();
+
+    }
+
+    @Override
     public ApplicationHelper getHelper() {
         return ApplicationHelper.getInstance();
+    }
+
+    @Override
+    public void addViewHomeFragment(List<Products> productsList) {
+
+        this.productsList = productsList;
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        HomeFragment fragment = new HomeFragment(productsList);
+        transaction.replace(R.id.frame_layout_main, fragment);
+        transaction.commitAllowingStateLoss();
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+
     }
 }

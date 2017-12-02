@@ -10,8 +10,7 @@ import android.util.Log;
 import com.demo.ecommerce.database.RunTimeSqLiteHelper;
 import com.demo.ecommerce.helper.ApplicationHelper;
 import com.demo.ecommerce.helper.HelperInterface;
-import com.demo.ecommerce.models.Categories;
-import com.demo.ecommerce.models.Products;
+import com.demo.ecommerce.models.product.Products;
 import com.demo.ecommerce.utils.ApplicationUtils;
 import com.demo.ecommerce.utils.DeserializeUtils;
 
@@ -31,6 +30,7 @@ public class ProductsDataSource implements HelperInterface {
     RunTimeSqLiteHelper dbHelper;
 
     private String[] allColumns = {
+            PRODUCT_CATEGORYID   ,
             PRODUCT_RANKINGID   ,
             PRODUCT_NAME        ,
             PRODUCT_DATE_ADDED  ,
@@ -60,6 +60,7 @@ public class ProductsDataSource implements HelperInterface {
 
         ContentValues values = new ContentValues();
 
+        values.put(PRODUCT_CATEGORYID , products.getCategoryID());
         values.put(PRODUCT_RANKINGID  , products.getRankingID());
         values.put(PRODUCT_NAME       , products.getName());
         values.put(PRODUCT_DATE_ADDED , products.getDate_added());
@@ -71,13 +72,14 @@ public class ProductsDataSource implements HelperInterface {
 
 
         long insertId = database.insert(TABLE_PRODUCTS, null, values);
-        Log.i(TAG, "created products with Ranking id : " + products.getRankingID());
+        Log.i(TAG, "created products with Ranking id : " + products.getRankingID()+" and Category Id : "+products.getCategoryID());
         return insertId;
     }
 
     public int updateProducts(Products products) {
         ContentValues values = new ContentValues();
 
+        values.put(PRODUCT_CATEGORYID , products.getCategoryID());
         values.put(PRODUCT_RANKINGID  , products.getRankingID());
         values.put(PRODUCT_NAME       , products.getName());
         values.put(PRODUCT_DATE_ADDED , products.getDate_added());
@@ -103,7 +105,7 @@ public class ProductsDataSource implements HelperInterface {
 
 
     public Products getProducts() {
-        Cursor cursor = database.query(TABLE_CATEGORY, allColumns, null,null, null, null, null);
+        Cursor cursor = database.query(TABLE_PRODUCTS, allColumns, null,null, null, null, null);
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             Products products = cursorToProducts(cursor);
@@ -113,10 +115,11 @@ public class ProductsDataSource implements HelperInterface {
         }
     }
 
-    public Products getProductById(int id) {
+    public Products getProductById(String id) {
 
         Cursor cursor = database.query(TABLE_PRODUCTS, allColumns, PRODUCT_RANKINGID + "=?",
-                new String[]{String.valueOf(id)}, null, null, null);
+                new String[]{id}, null, null, null);
+
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             Products products = cursorToProducts(cursor);
@@ -152,6 +155,22 @@ public class ProductsDataSource implements HelperInterface {
         return productses;
     }
 
+    public List<Products> getAllProductsByCatergoryId(String id) {
+        List<Products> productsList = new ArrayList<Products>();
+
+        Cursor cursor = database.query(TABLE_PRODUCTS, allColumns, PRODUCT_CATEGORYID + "=?",
+                new String[]{id}, null, null, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Products products = cursorToProducts(cursor);
+            productsList.add(products);
+            cursor.moveToNext();
+        }
+        Log.i(TAG, "total Products found : " + cursor.getCount() + " Products list size : " + productsList.size());
+        cursor.close();
+        return productsList;
+    }
 
 
     public List<Products> getAllProducts() {
@@ -176,14 +195,15 @@ public class ProductsDataSource implements HelperInterface {
     private Products cursorToProducts(Cursor cursor) {
         Products products = new Products();
 
-        products.setRankingID(cursor.getInt(0));
-        products.setName(cursor.getString(1));
-        products.setDate_added(cursor.getString(2));
-        products.setVariants(DeserializeUtils.deserializeVariants(cursor.getString(3)));
-        products.setTax(DeserializeUtils.deserializeTax(cursor.getString(4)));
-        products.setViewId(cursor.getLong(5));
-        products.setOrderId(cursor.getLong(6));
-        products.setShareId(cursor.getLong(7));
+        products.setCategoryID(cursor.getInt(0));
+        products.setRankingID(cursor.getInt(1));
+        products.setName(cursor.getString(2));
+        products.setDate_added(cursor.getString(3));
+        products.setVariants(DeserializeUtils.deserializeVariants(cursor.getString(4)));
+        products.setTax(DeserializeUtils.deserializeTax(cursor.getString(5)));
+        products.setViewId(cursor.getLong(6));
+        products.setOrderId(cursor.getLong(7));
+        products.setShareId(cursor.getLong(8));
 
         return products;
     }

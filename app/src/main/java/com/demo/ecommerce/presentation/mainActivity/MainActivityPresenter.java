@@ -10,18 +10,15 @@ import com.android.volley.VolleyLog;
 import com.demo.ecommerce.AppContext;
 import com.demo.ecommerce.BuildConfig;
 import com.demo.ecommerce.MainActivity;
-import com.demo.ecommerce.database.datasource.AppVersionDataSource;
 import com.demo.ecommerce.database.datasource.CategoryDataSource;
 import com.demo.ecommerce.database.datasource.ProductsDataSource;
 import com.demo.ecommerce.di.DependencyInjector;
 import com.demo.ecommerce.managers.CustomVolleyPostRequestWithTextPlain;
-import com.demo.ecommerce.models.AppVersion;
-import com.demo.ecommerce.models.Categories;
+import com.demo.ecommerce.models.category.Categories;
 import com.demo.ecommerce.models.EcommerceModel;
-import com.demo.ecommerce.models.ProductRanking;
-import com.demo.ecommerce.models.Products;
-import com.demo.ecommerce.models.Rankings;
-import com.demo.ecommerce.presentation.mainActivity.MainActivityContractor;
+import com.demo.ecommerce.models.product.ProductRanking;
+import com.demo.ecommerce.models.product.Products;
+import com.demo.ecommerce.models.product.Rankings;
 import com.demo.ecommerce.utils.ApplicationUtils;
 import com.demo.ecommerce.utils.DeserializeUtils;
 
@@ -92,11 +89,12 @@ public class MainActivityPresenter implements MainActivityContractor.Presenter {
                                 List<Products> productsList = new ArrayList();
 
                                 for(Categories categories : ecommerceModel.getCategories()){
-                                    Log.e(TAG, "category name : "+ categories.getName() + "\n category ID : "+ categories.getId() );
+                                  //  Log.e(TAG, "category name : "+ categories.getName() + "\n category ID : "+ categories.getId() );
 
                                     categoryDataSource.createCategory(categories);
 
                                     for(Products products : categories.getProducts()){
+                                        products.setCategoryID(categories.getId());
                                         productsList.add(products);
                                     }
 
@@ -145,20 +143,6 @@ public class MainActivityPresenter implements MainActivityContractor.Presenter {
 
                                 }
                                 // creating Products Table as per the Order, View and Share Id : ens
-
-
-           /* for(Categories categories : categoryDataSource.getAllCategories()){
-
-                String[] child = categories.getChild_categories();
-
-                if(child != null && child.length > 0){
-                    Log.e(TAG, " "+categories.getId()+ " - "+categories.getName()+" - "+ categories.getChild_categories()[0]);
-
-                }else {
-                    Log.e(TAG, " "+categories.getId()+ " - "+categories.getName()+" - NULL");
-                }
-
-            }*/
 
                                 categoryDataSource.close();
                                 productsDataSource.close();

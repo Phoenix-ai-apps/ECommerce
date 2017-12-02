@@ -1,4 +1,4 @@
-package com.demo.ecommerce.models;
+package com.demo.ecommerce.models.product;
 
 import android.os.Parcel;
 import android.os.Parcelable;

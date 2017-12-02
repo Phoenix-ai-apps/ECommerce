@@ -1,4 +1,4 @@
-package com.demo.ecommerce.models;
+package com.demo.ecommerce.models.product;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -15,6 +15,7 @@ public class Products implements Parcelable {
 
     @SerializedName("id")
     private int            rankingID;
+    private int            categoryID;
     private String         name;
     private String         date_added;
     private List<Variants> variants;
@@ -25,6 +26,14 @@ public class Products implements Parcelable {
 
 
 
+
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
+    }
 
     public int getRankingID() {
         return rankingID;
@@ -90,6 +99,9 @@ public class Products implements Parcelable {
         this.orderId = orderId;
     }
 
+    public Products() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -98,6 +110,7 @@ public class Products implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.rankingID);
+        dest.writeInt(this.categoryID);
         dest.writeString(this.name);
         dest.writeString(this.date_added);
         dest.writeTypedList(this.variants);
@@ -107,11 +120,9 @@ public class Products implements Parcelable {
         dest.writeLong(this.orderId);
     }
 
-    public Products() {
-    }
-
     protected Products(Parcel in) {
         this.rankingID = in.readInt();
+        this.categoryID = in.readInt();
         this.name = in.readString();
         this.date_added = in.readString();
         this.variants = in.createTypedArrayList(Variants.CREATOR);

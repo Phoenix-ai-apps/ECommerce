@@ -3,6 +3,9 @@ package com.demo.ecommerce.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.demo.ecommerce.models.category.Categories;
+import com.demo.ecommerce.models.product.Rankings;
+
 import java.util.List;
 
 /**

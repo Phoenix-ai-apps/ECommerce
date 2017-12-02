@@ -6,12 +6,11 @@ import com.demo.ecommerce.gsonAdapters.IntegerTypeAdapter;
 import com.demo.ecommerce.gsonAdapters.LongTypeAdapter;
 import com.demo.ecommerce.helper.ApplicationHelper;
 import com.demo.ecommerce.helper.HelperInterface;
-import com.demo.ecommerce.models.Categories;
+import com.demo.ecommerce.models.category.Categories;
 import com.demo.ecommerce.models.EcommerceModel;
-import com.demo.ecommerce.models.GlobalResponse;
-import com.demo.ecommerce.models.Products;
-import com.demo.ecommerce.models.Tax;
-import com.demo.ecommerce.models.Variants;
+import com.demo.ecommerce.models.product.Products;
+import com.demo.ecommerce.models.product.Tax;
+import com.demo.ecommerce.models.product.Variants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -86,6 +85,17 @@ public class DeserializeUtils implements HelperInterface {
         Products object = null;
         try {
             object = getGsonObject().fromJson(json, Products.class);
+        } catch (Exception e) {
+            StackTraceWriter.printStackTrace(e);
+        }
+        return object;
+    }
+
+    public static List<Products> deserializeProductsList(String json){
+
+        List<Products> object = null;
+        try {
+            object = getGsonObject().fromJson(json, new TypeToken<List<Products>>() {}.getType());
         } catch (Exception e) {
             StackTraceWriter.printStackTrace(e);
         }

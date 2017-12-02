@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.demo.ecommerce.R;
-import com.demo.ecommerce.adapters.RecyclerViewAdapter;
+import com.demo.ecommerce.adapters.HomeFragmentRecAdapter;
 import com.demo.ecommerce.database.datasource.CategoryDataSource;
 import com.demo.ecommerce.database.datasource.ProductsDataSource;
 import com.demo.ecommerce.fragments.BaseFragment;
 import com.demo.ecommerce.helper.ApplicationHelper;
-import com.demo.ecommerce.models.Products;
+import com.demo.ecommerce.models.product.Products;
 import com.demo.ecommerce.presentation.homeActivity.HomeActivityContractor;
 import com.demo.ecommerce.presentation.homeActivity.HomeActivityPresenter;
 
@@ -74,7 +74,7 @@ public class HomeFragment extends BaseFragment<HomeActivityPresenter> implements
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
 
         if(productsList !=null && productsList.size() > 0){
-            RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(mActivity,productsList);
+            HomeFragmentRecAdapter recyclerViewAdapter = new HomeFragmentRecAdapter(mActivity,productsList);
             recyclerView.setAdapter(recyclerViewAdapter);
             recyclerViewAdapter.notifyDataSetChanged();
 
