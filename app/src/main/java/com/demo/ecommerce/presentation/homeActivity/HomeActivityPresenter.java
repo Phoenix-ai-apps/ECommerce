@@ -121,7 +121,7 @@ public class HomeActivityPresenter implements HomeActivityContractor.Presenter{
     }
 
     @Override
-    public void refreshHomeProducts(String productName) {
+    public void refreshProducts(String productName) {
 
         productsDataSource.open();
         List<Products> productsList = productsDataSource.getAllProducstsByName(productName);

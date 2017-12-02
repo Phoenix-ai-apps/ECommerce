@@ -24,7 +24,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.demo.ecommerce.adapters.HomeFragmentRecAdapter;
 import com.demo.ecommerce.adapters.MenuRecAdapter;
 import com.demo.ecommerce.database.datasource.ProductsDataSource;
 import com.demo.ecommerce.di.DependencyInjector;
@@ -116,7 +115,7 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if(s.toString().trim().length() > 0){
-                    mPresenter.refreshHomeProducts(s.toString().trim());
+                    mPresenter.refreshProducts(s.toString().trim());
                 }else {
                     addHomeFragment(productsList);
                 }
@@ -142,13 +141,16 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
         List<Products> productsList = productsDataSource.getAllProducts();
         productsDataSource.close();
 
-        this.productsList = productsList;
-
         addHomeFragment(productsList);
 
     }
 
     private void addHomeFragment(List<Products> productsList) {
+
+        if(productsList != null && productsList.size() > 0){
+            this.productsList = productsList;
+        }
+
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         HomeFragment fragment = new HomeFragment(productsList);
@@ -180,8 +182,6 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
 
     @Override
     public void refreshHomeProducts(List<Products> productsList) {
-
-        this.productsList = productsList;
 
         addHomeFragment(productsList);
 
@@ -223,8 +223,15 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
 
     }
 
-    public void hideMenu(){
+    @Override
+    public void addViewHomeFragment(List<Products> productsList) {
+
+        this.productsList = productsList;
         drawerLayout.closeDrawer(GravityCompat.START);
+
+        addHomeFragment(productsList);
+
+
     }
 
     private Dialog showProductSortDialog(Context context) {
@@ -333,17 +340,4 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
         return ApplicationHelper.getInstance();
     }
 
-    @Override
-    public void addViewHomeFragment(List<Products> productsList) {
-
-        this.productsList = productsList;
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        HomeFragment fragment = new HomeFragment(productsList);
-        transaction.replace(R.id.frame_layout_main, fragment);
-        transaction.commitAllowingStateLoss();
-
-        drawerLayout.closeDrawer(GravityCompat.START);
-
-    }
 }

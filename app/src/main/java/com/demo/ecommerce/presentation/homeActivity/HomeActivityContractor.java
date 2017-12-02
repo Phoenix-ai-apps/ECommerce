@@ -32,7 +32,7 @@ public interface HomeActivityContractor {
 
         void bindMenu();
 
-        void refreshHomeProducts(String productName);
+        void refreshProducts(String productName);
 
     }
 
