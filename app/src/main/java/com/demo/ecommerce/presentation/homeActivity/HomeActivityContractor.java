@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface HomeActivityContractor {
 
-    interface View extends BaseView{
+    interface View extends BaseView   {
 
         void populateMenuAndSubMenu(List<MenuCategoryNSubCategory> subCategoryList);
 

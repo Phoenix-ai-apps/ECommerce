@@ -36,8 +36,8 @@ import butterknife.BindView;
 
 public class HomeFragment extends BaseFragment<HomeActivityPresenter> implements HomeActivityContractor.HomeFragmentView, HomeView {
 
-    @BindView(R.id.recyclerView)     RecyclerView recyclerView;
-    @BindView(R.id.layout_no_items)  LinearLayout layoutNoItems;
+    @BindView(R.id.recyclerView)    RecyclerView recyclerView;
+    @BindView(R.id.layout_no_items) LinearLayout layoutNoItems;
 
     @Inject
     CategoryDataSource categoryDataSource;

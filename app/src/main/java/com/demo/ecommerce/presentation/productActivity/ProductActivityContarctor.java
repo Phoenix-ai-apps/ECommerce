@@ -17,7 +17,7 @@ public interface ProductActivityContarctor {
 
     interface Presenter extends BasePresenter{
 
-        void setProductDetails(Variants variants);
+        void setProductDetails(Variants variants) ;
 
     }
 

@@ -28,6 +28,6 @@ public class ProductActivityPresenter implements ProductActivityContarctor.Prese
 
     @Override
     public void setProductDetails(Variants variants) {
-         mView.showProductDetails(variants);
+         mView.showProductDetails(variants) ;
     }
 }

@@ -102,7 +102,7 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
         });
         toggle.syncState();
 
-        txtVerion.setText("v"+BuildConfig.APP_VERSION);
+         txtVerion.setText("v"+BuildConfig.APP_VERSION);
 
 
         edtSearch.addTextChangedListener(new TextWatcher() {

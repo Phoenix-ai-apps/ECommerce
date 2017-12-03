@@ -76,7 +76,7 @@ public class HomeFragmentRecAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 }
 
                 if(products != null && products.getShareId() != 0){
-                    itemViewHolder.txtShare.setText("Shared: "+products.getShareId());
+                    itemViewHolder.txtShare.setText("Shared: "+products.getShareId()) ;
                 }else{
                     itemViewHolder.txtShare.setText("Shared: 0");
                 }

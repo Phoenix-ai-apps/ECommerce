@@ -12,6 +12,6 @@ public interface AppConstants {
     String SORT_ORDER                      = "ORDERED";
     String SORT_VIEWED                     = "VIEWED";
     String SORT_SHARED                     = "SHARED";
-    String PRODUCT_OBJECT                  = "Product";
+    String PRODUCT_OBJECT                  = "Product" ;
 
 }

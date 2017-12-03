@@ -10,7 +10,7 @@ import com.demo.ecommerce.models.EcommerceModel;
 
 public interface MainActivityContractor {
 
-    interface View extends BaseView {
+    interface View  extends BaseView {
 
         void showErrorInView(String error);
         void showVolleyException(String e);

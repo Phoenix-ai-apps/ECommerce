@@ -37,8 +37,8 @@ public class MenuRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     List<MenuCategoryNSubCategory> subCategoryList;
 
     public MenuRecAdapter(AppCompatActivity mContext, List<MenuCategoryNSubCategory> subCategoryList) {
-        this.mContext        = mContext;
-        this.subCategoryList = subCategoryList;
+        this.mContext        = mContext ;
+        this.subCategoryList = subCategoryList ;
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {

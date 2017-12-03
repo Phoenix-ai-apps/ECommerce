@@ -30,7 +30,7 @@ public class ProductDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public ProductDetailsAdapter(ProductActivityContarctor.Presenter presenter, AppCompatActivity mContext, Products products) {
         this.presenter    = presenter;
         this.mContext     = mContext;
-        this.variantsList = products.getVariants();
+        this.variantsList = products.getVariants() ;
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {

@@ -41,7 +41,6 @@ public class MainActivityPresenter implements MainActivityContractor.Presenter {
 
     @Inject
     CategoryDataSource categoryDataSource;
-
     @Inject
     ProductsDataSource productsDataSource;
 

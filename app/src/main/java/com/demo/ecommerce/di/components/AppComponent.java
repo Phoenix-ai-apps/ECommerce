@@ -36,6 +36,7 @@ public interface AppComponent {
     void inject(ProductDetailsActivity detailsActivity);
 
 
+
     //Presenter Injection
     void inject(MainActivityPresenter presenter);
 

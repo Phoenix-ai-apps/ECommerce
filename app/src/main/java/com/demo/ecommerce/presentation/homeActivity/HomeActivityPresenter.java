@@ -131,7 +131,7 @@ public class HomeActivityPresenter implements HomeActivityContractor.Presenter{
             mView.refreshHomeProducts(productsList);
         }else {
 
-           Log.e(TAG, "Null");
+          // Log.e(TAG, "Null");
         }
 
 
