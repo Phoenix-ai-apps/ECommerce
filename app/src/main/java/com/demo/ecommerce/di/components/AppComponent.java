@@ -3,12 +3,14 @@ package com.demo.ecommerce.di.components;
 import com.demo.ecommerce.AppContext;
 import com.demo.ecommerce.HomeActivity;
 import com.demo.ecommerce.MainActivity;
+import com.demo.ecommerce.ProductDetailsActivity;
 import com.demo.ecommerce.di.modules.AppModule;
 import com.demo.ecommerce.di.modules.DatabaseModules;
 import com.demo.ecommerce.fragments.homeActivity.HomeFragment;
 import com.demo.ecommerce.fragments.mainActivity.SplashFragment;
 import com.demo.ecommerce.presentation.homeActivity.HomeActivityPresenter;
 import com.demo.ecommerce.presentation.mainActivity.MainActivityPresenter;
+import com.demo.ecommerce.presentation.productActivity.ProductActivityPresenter;
 
 import javax.inject.Singleton;
 
@@ -31,11 +33,16 @@ public interface AppComponent {
 
     void inject(HomeActivity homeActivity);
 
+    void inject(ProductDetailsActivity detailsActivity);
+
 
     //Presenter Injection
     void inject(MainActivityPresenter presenter);
 
     void inject(HomeActivityPresenter presenter);
+
+    void inject(ProductActivityPresenter productActivityPresenter);
+
 
     //Fragment Injection
     void inject(SplashFragment splashFragment);

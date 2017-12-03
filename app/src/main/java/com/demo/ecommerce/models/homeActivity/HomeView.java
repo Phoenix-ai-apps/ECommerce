@@ -12,4 +12,6 @@ public interface HomeView {
 
     void addViewHomeFragment(List<Products> productses);
 
+    void addProductDetailsActivity(Products products);
+
 }

@@ -33,12 +33,8 @@ import butterknife.ButterKnife;
 
 public class MenuRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private AppCompatActivity mContext;
+    private AppCompatActivity      mContext;
     List<MenuCategoryNSubCategory> subCategoryList;
-    private HomeView homeView;
-
-    @Inject
-    ProductsDataSource productsDataSource;
 
     public MenuRecAdapter(AppCompatActivity mContext, List<MenuCategoryNSubCategory> subCategoryList) {
         this.mContext        = mContext;
@@ -97,16 +93,7 @@ public class MenuRecAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private void addHomeFragment(List<Products> productsList) {
 
-       // homeView.addViewHomeFragment(productsList);
-
         ((HomeView)mContext).addViewHomeFragment(productsList);
-
-    /*    if(mContext.getSupportFragmentManager() != null){
-            FragmentTransaction transaction = mContext.getSupportFragmentManager().beginTransaction();
-            HomeFragment fragment = new HomeFragment(productsList);
-            transaction.replace(R.id.frame_layout_main, fragment);
-            transaction.commitAllowingStateLoss();
-        }*/
 
     }
 

@@ -136,4 +136,9 @@ public class HomeActivityPresenter implements HomeActivityContractor.Presenter{
 
 
     }
+
+    @Override
+    public void addProductDetailsActivity(Products products) {
+         homeFragmentView.addProductActivity(products);
+    }
 }

@@ -2,19 +2,24 @@ package com.demo.ecommerce.fragments.homeActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.IntentService;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.demo.ecommerce.ProductDetailsActivity;
 import com.demo.ecommerce.R;
 import com.demo.ecommerce.adapters.HomeFragmentRecAdapter;
 import com.demo.ecommerce.database.datasource.CategoryDataSource;
 import com.demo.ecommerce.database.datasource.ProductsDataSource;
 import com.demo.ecommerce.fragments.BaseFragment;
 import com.demo.ecommerce.helper.ApplicationHelper;
+import com.demo.ecommerce.models.homeActivity.HomeView;
 import com.demo.ecommerce.models.product.Products;
 import com.demo.ecommerce.presentation.homeActivity.HomeActivityContractor;
 import com.demo.ecommerce.presentation.homeActivity.HomeActivityPresenter;
@@ -29,8 +34,7 @@ import butterknife.BindView;
  * Created by root on 1/12/17.
  */
 
-public class HomeFragment extends BaseFragment<HomeActivityPresenter> implements HomeActivityContractor.HomeFragmentView {
-
+public class HomeFragment extends BaseFragment<HomeActivityPresenter> implements HomeActivityContractor.HomeFragmentView, HomeView {
 
     @BindView(R.id.recyclerView)     RecyclerView recyclerView;
     @BindView(R.id.layout_no_items)  LinearLayout layoutNoItems;
@@ -43,13 +47,13 @@ public class HomeFragment extends BaseFragment<HomeActivityPresenter> implements
 
     List<Products> productsList;
 
-    private Activity mActivity;
+    private AppCompatActivity mActivity;
 
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.mActivity = activity;
+        this.mActivity = (AppCompatActivity) activity;
 
     }
 
@@ -72,7 +76,7 @@ public class HomeFragment extends BaseFragment<HomeActivityPresenter> implements
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
 
         if(productsList !=null && productsList.size() > 0){
-            HomeFragmentRecAdapter recyclerViewAdapter = new HomeFragmentRecAdapter(mActivity,productsList);
+            HomeFragmentRecAdapter recyclerViewAdapter = new HomeFragmentRecAdapter(mPresenter, mActivity, productsList);
             recyclerView.setAdapter(recyclerViewAdapter);
             recyclerViewAdapter.notifyDataSetChanged();
 
@@ -94,11 +98,28 @@ public class HomeFragment extends BaseFragment<HomeActivityPresenter> implements
     }
 
 
-
     @Override
     public ApplicationHelper getHelper() {
         return ApplicationHelper.getInstance();
     }
 
 
+    @Override
+    public void addViewHomeFragment(List<Products> productses) {
+
+    }
+
+    @Override
+    public void addProductDetailsActivity(Products products) {
+
+    }
+
+    @Override
+    public void addProductActivity(Products products) {
+
+        Intent intent = new Intent(mActivity, ProductDetailsActivity.class);
+        intent.putExtra(PRODUCT_OBJECT, products);
+        startActivity(intent);
+
+    }
 }

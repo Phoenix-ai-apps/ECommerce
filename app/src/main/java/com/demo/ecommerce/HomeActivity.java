@@ -46,7 +46,7 @@ import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements HomeActivityContractor.View, View.OnClickListener,HomeView {
 
-    public static final String TAG = HomeActivity   .class.getSimpleName();
+    public static final String TAG = HomeActivity.class.getSimpleName();
 
     @BindView(R.id.toolbar)         Toolbar        toolbar;
     @BindView(R.id.drawer_layout)   DrawerLayout   drawerLayout;
@@ -231,6 +231,11 @@ public class HomeActivity extends BaseActivity<HomeActivityPresenter> implements
 
         addHomeFragment(productsList);
 
+
+    }
+
+    @Override
+    public void addProductDetailsActivity(Products products) {
 
     }
 

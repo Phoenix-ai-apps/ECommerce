@@ -25,6 +25,8 @@ public interface HomeActivityContractor {
 
       //  void refreshProdusts(List<Products> productsList);
 
+        void addProductActivity(Products products);
+
     }
 
 
@@ -33,6 +35,8 @@ public interface HomeActivityContractor {
         void bindMenu();
 
         void refreshProducts(String productName);
+
+        void addProductDetailsActivity(Products products);
 
     }
 

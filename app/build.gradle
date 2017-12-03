@@ -6,20 +6,20 @@ apply plugin: 'me.tatarka.retrolambda'
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
-    def STRING                        = "String"
-    def INT                           = "int"
+    def STRING = "String"
+    def INT = "int"
 
-    def VARIABLE_VERSION              = "APP_VERSION"
-    def VARIABLE_APP_ENVIRONMENT      = "APP_ENVIRONMENT"
-    def VARIABLE_BASE_URL             = "BASE_URL"
+    def VARIABLE_VERSION = "APP_VERSION"
+    def VARIABLE_APP_ENVIRONMENT = "APP_ENVIRONMENT"
+    def VARIABLE_BASE_URL = "BASE_URL"
 
-    def VALUE_VERSION_UAT             = '"1.0"'
-    def VALUE_VERSION_STAGING         = '"1.0"'
-    def VALUE_VERSION_LIVE            = '"1.0"'
-    def VALUE_BASE_URL                = '"https://stark-spire-93433.herokuapp.com/"'
+    def VALUE_VERSION_UAT = '"1.0"'
+    def VALUE_VERSION_STAGING = '"1.0"'
+    def VALUE_VERSION_LIVE = '"1.0"'
+    def VALUE_BASE_URL = '"https://stark-spire-93433.herokuapp.com/"'
 
-    def VALUE_APP_ENVIRONMENT_UAT     = '"UAT"'
-    def VALUE_APP_ENVIRONMENT_LIVE    = '"LIVE"'
+    def VALUE_APP_ENVIRONMENT_UAT = '"UAT"'
+    def VALUE_APP_ENVIRONMENT_LIVE = '"LIVE"'
     def VALUE_APP_ENVIRONMENT_STAGING = '"STAGING"'
 
     compileSdkVersion globalConfiguration.getAt("compileSdk")
@@ -147,8 +147,8 @@ dependencies {
     androidTestCompile(globalTestDependencies.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-   // androidTestCompile globalTestDependencies.supportAnnotations
-   // androidTestCompile globalTestDependencies.testRunner
+    // androidTestCompile globalTestDependencies.supportAnnotations
+    // androidTestCompile globalTestDependencies.testRunner
 
 
     compile globalDependencies.butterknife
@@ -161,9 +161,9 @@ dependencies {
     compile globalDependencies.cardView
     compile globalDependencies.dagger
     annotationProcessor globalDependencies.daggerCompiler
-   // compile globalDependencies.daggerActivity
-   // annotationProcessor globalDependencies.daggerActivityCompiler
-   // compile globalDependencies.daggerSupport
+    // compile globalDependencies.daggerActivity
+    // annotationProcessor globalDependencies.daggerActivityCompiler
+    // compile globalDependencies.daggerSupport
     compile globalDependencies.butterknifeCompiler
     compile globalDependencies.butterknife
     compile globalDependencies.gson
@@ -172,4 +172,5 @@ dependencies {
 
     /*compile globalDependencies.multiDex*/
 
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

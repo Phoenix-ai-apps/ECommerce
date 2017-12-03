@@ -12,6 +12,7 @@
         android:layout_margin="@dimen/_5sdp">
 
         <LinearLayout
+            android:id="@+id/layout_home_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
