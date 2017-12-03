@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.demo.ecommerce.R;
@@ -36,6 +37,7 @@ public class ProductDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.txt_product_color)            TextView txtProductColor;
+        @BindView(R.id.layout_color)                 LinearLayout layoutColor;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
@@ -64,7 +66,7 @@ public class ProductDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     itemViewHolder.txtProductColor.setText(variants.getColor().trim());
                 }
 
-                itemViewHolder.txtProductColor.setOnClickListener(view -> addProductDetailsInActivity(variants));
+                itemViewHolder.layoutColor.setOnClickListener(view -> addProductDetailsInActivity(variants));
 
             }
         }

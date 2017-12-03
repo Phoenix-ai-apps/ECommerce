@@ -54,8 +54,16 @@ public class ProductDetailsActivity extends BaseActivity<ProductActivityPresente
     private void initResources() {
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true) ;
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              onBackPressed();
+            }
+        });
 
        if(products != null && products.getVariants() != null && products.getVariants().size() > 0){
 
@@ -102,14 +110,14 @@ public class ProductDetailsActivity extends BaseActivity<ProductActivityPresente
             layoutPrice.setVisibility(View.VISIBLE);
 
             if(variants.getPrice() != null && variants.getPrice().trim().length() > 0){
-                txtPrice.setText("Price - "+variants.getPrice().trim());
+                txtPrice.setText("Price : "+getResources().getString(R.string.rupee)+" "+variants.getPrice().trim());
 
             }else{
                 txtPrice.setVisibility(View.GONE);
             }
 
             if(variants.getSize() != null && variants.getSize().trim().length() > 0){
-                txtSize.setText("Size - "+variants.getSize().trim());
+                txtSize.setText("Size : "+variants.getSize().trim());
             }else{
                 txtSize.setVisibility(View.GONE);
             }
@@ -117,9 +125,9 @@ public class ProductDetailsActivity extends BaseActivity<ProductActivityPresente
             if(products.getTax() != null && products.getTax().getName() != null && products.getTax().getName().trim().length() > 0){
 
                 if(products.getTax().getValue() != null && products.getTax().getValue().trim().length() > 0){
-                    txtTax.setText("Tax - "+products.getTax().getName().trim()+" - "+products.getTax().getValue().trim()+"%");
+                    txtTax.setText("Tax : "+products.getTax().getName().trim()+" - "+products.getTax().getValue().trim()+"%");
                 }else {
-                    txtTax.setText("Tax - "+products.getTax().getName().trim());
+                    txtTax.setText("Tax : "+products.getTax().getName().trim());
                 }
 
             }else{
