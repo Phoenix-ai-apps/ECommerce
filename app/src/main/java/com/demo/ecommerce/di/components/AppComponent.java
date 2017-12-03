@@ -44,7 +44,7 @@ public interface AppComponent {
     void inject(ProductActivityPresenter productActivityPresenter);
 
 
-    //Fragment Injection
+    //Fragment Injections
     void inject(SplashFragment splashFragment);
 
     void inject(HomeFragment homeFragment);

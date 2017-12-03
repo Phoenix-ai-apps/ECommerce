@@ -25,7 +25,7 @@ public class ProductDetailsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private AppCompatActivity mContext;
     List<Variants> variantsList;
-    private ProductActivityContarctor.Presenter presenter;
+    private ProductActivityContarctor.Presenter presenter ;
 
     public ProductDetailsAdapter(ProductActivityContarctor.Presenter presenter, AppCompatActivity mContext, Products products) {
         this.presenter    = presenter;

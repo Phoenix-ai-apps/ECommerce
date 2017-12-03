@@ -17,7 +17,7 @@ public class ProductActivityPresenter implements ProductActivityContarctor.Prese
     public <T extends ProductDetailsActivity & ProductActivityContarctor.View> ProductActivityPresenter(T view) {
         this.mView = view;
 
-        DependencyInjector.appComponent().inject(this);
+        DependencyInjector.appComponent().inject(this) ;
 
     }
 

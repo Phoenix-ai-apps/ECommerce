@@ -11,7 +11,7 @@ import com.demo.ecommerce.models.product.Variants;
 public interface ProductActivityContarctor {
 
     interface View extends BaseView{
-      void showProductDetails(Variants variants);
+      void showProductDetails(Variants  variants);
     }
 
 

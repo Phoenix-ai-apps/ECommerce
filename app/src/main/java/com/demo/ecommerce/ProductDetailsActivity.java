@@ -54,7 +54,7 @@ public class ProductDetailsActivity extends BaseActivity<ProductActivityPresente
     private void initResources() {
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true) ;
 
 
        if(products != null && products.getVariants() != null && products.getVariants().size() > 0){
