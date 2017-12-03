@@ -29,6 +29,7 @@ public class ProductDetailsActivity extends BaseActivity<ProductActivityPresente
     @BindView(R.id.rec_view_product)         RecyclerView recViewProduct;
     @BindView(R.id.layout_price)             LinearLayout layoutPrice;
 
+    @BindView(R.id.txt_product_name)         TextView txtProductName;
     @BindView(R.id.txt_price)                TextView txtPrice;
     @BindView(R.id.txt_size)                 TextView txtSize;
     @BindView(R.id.txt_tax)                  TextView txtTax;
@@ -58,7 +59,8 @@ public class ProductDetailsActivity extends BaseActivity<ProductActivityPresente
 
        if(products != null && products.getVariants() != null && products.getVariants().size() > 0){
 
-           toolbar.setTitle(products.getName().trim());
+           txtProductName.setText(products.getName().trim());
+
 
            recViewProduct.setHasFixedSize(true);
            recViewProduct.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));

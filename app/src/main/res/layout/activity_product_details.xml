@@ -17,9 +17,19 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
+            android:tooltipText="@string/app_name"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways">
+
+
+            <TextView
+                android:id="@+id/txt_product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         </android.support.v7.widget.Toolbar>
 
